@@ -6,6 +6,8 @@ import java.util.ArrayList;
 //import java.util.Comparator;
 import java.util.List;
 
+import javax.annotation.processing.Processor;
+
 //Processing library
 import processing.core.PApplet;
 
@@ -80,14 +82,33 @@ public class EarthquakeCityMap extends PApplet {
 	    	System.out.println(f.getProperties());
 	    	Object magObj = f.getProperty("magnitude");
 	    	float mag = Float.parseFloat(magObj.toString());
-	    	// PointFeatures also have a getLocation method
+	    	System.out.println(mag);
 	    }
-	    
 	    // Here is an example of how to use Processing's color method to generate 
 	    // an int that represents the color yellow.  
 	    int yellow = color(255, 255, 0);
+	    int red = color(255, 0, 0);
+	    int blue = color(0, 0, 255);
 	    
-	    //TODO: Add code here as appropriate
+	    for (int i =0; i<earthquakes.size();i++){
+	    	PointFeature f = earthquakes.get(i);
+	    	Object magObj = f.getProperty("magnitude");
+	    	float mag = Float.parseFloat(magObj.toString());
+	    	if (Float.compare(mag, (float) 4.0) == 0){
+	    		markers.add(createMarker(earthquakes.get(i)));
+	    		markers.get(i).setColor(yellow);
+	    	}
+	    	else if (Float.compare(mag, (float) 4.9) == 0){
+	    		markers.add(createMarker(earthquakes.get(i)));
+	    		markers.get(i).setColor(red);
+	    	}
+	    	else{
+	    		markers.add(createMarker(earthquakes.get(i)));
+	    		markers.get(i).setColor(blue);
+	    	}
+	    	markers.get(i).setStrokeWeight(0);
+	    }
+	    map.addMarkers(markers);
 	}
 		
 	// A suggested helper method that takes in an earthquake feature and 
@@ -95,7 +116,6 @@ public class EarthquakeCityMap extends PApplet {
 	// TODO: Implement this method and call it from setUp, if it helps
 	private SimplePointMarker createMarker(PointFeature feature)
 	{
-		// finish implementing and use this method, if it helps.
 		return new SimplePointMarker(feature.getLocation());
 	}
 	
@@ -110,7 +130,10 @@ public class EarthquakeCityMap extends PApplet {
 	// TODO: Implement this method to draw the key
 	private void addKey() 
 	{	
-		// Remember you can use Processing's graphics methods here
-	
+		rect(30,70,150,400);
+		fill(0, 0, 0);
+		text("Earthquake Key", 40, 90);
+		fill(255,255,255);
+		
 	}
 }
