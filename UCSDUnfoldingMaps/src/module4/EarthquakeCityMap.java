@@ -1,7 +1,7 @@
 package module4;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.data.Feature;
@@ -161,12 +161,11 @@ public class EarthquakeCityMap extends PApplet {
 	// and returns true.  Notice that the helper method isInCountry will
 	// set this "country" property already.  Otherwise it returns false.
 	private boolean isLand(PointFeature earthquake) {
-		
-		// IMPLEMENT THIS: loop over all countries to check if location is in any of them
-		
-		// TODO: Implement this method using the helper method isInCountry
-		
-		// not inside any country
+		for(Marker country: countryMarkers){
+			if(isInCountry(earthquake, country)){
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -178,7 +177,10 @@ public class EarthquakeCityMap extends PApplet {
 	// And LandQuakeMarkers have a "country" property set.
 	private void printQuakes() 
 	{
-		// TODO: Implement this method
+		Map<String, String> quakes = new HashMap<String, String>();
+		for(int i =0; i < earthquake.size();i++){
+			
+		}
 	}
 	
 	
